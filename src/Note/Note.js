@@ -5,10 +5,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ApiContext from '../ApiContext'
 import config from '../config'
 import './Note.css'
+//import PropTypes from 'prop-types'
 
 export default class Note extends React.Component {
-  static defaultProps ={
-    onDeleteNote: () => {},
+  static defaultProps = {
+    match: {
+      params: {}
+    },
+    onDeleteNote: () => { },
   }
   static contextType = ApiContext;
 
@@ -25,11 +29,9 @@ export default class Note extends React.Component {
       .then(res => {
         if (!res.ok)
           return res.json().then(e => Promise.reject(e))
-        return res.json()
       })
-      .then(() => {
+      .then(() => {       
         this.context.deleteNote(noteId)
-        // allow parent to perform extra behaviour
         this.props.onDeleteNote(noteId)
       })
       .catch(error => {
@@ -38,12 +40,13 @@ export default class Note extends React.Component {
   }
 
   render() {
-    const { name, id, modified } = this.props
+    const { note_name, id, date_modified } = this.props
+    console.log(id)
     return (
       <div className='Note'>
         <h2 className='Note__title'>
-          <Link to={`/note/${id}`}>
-            {name}
+          <Link to={`/notes/${id}`}>
+            {note_name}
           </Link>
         </h2>
         <button
@@ -57,10 +60,10 @@ export default class Note extends React.Component {
         </button>
         <div className='Note__dates'>
           <div className='Note__dates-modified'>
-            Modified
+            Date Modified
             {' '}
             <span className='Date'>
-              {format(modified, 'Do MMM YYYY')}
+              {format(date_modified, 'Do MMM YYYY')}
             </span>
           </div>
         </div>
@@ -68,3 +71,11 @@ export default class Note extends React.Component {
     )
   }
 }
+
+
+// Note.propTypes = {
+//   onDeleteNote: PropTypes.func,
+//   id: PropTypes.string.isRequired,
+//   note_name: PropTypes.string.isRequired,
+//   date_modified: PropTypes.string.isRequired
+// }

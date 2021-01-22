@@ -6,6 +6,7 @@ import CircleButton from '../CircleButton/CircleButton'
 import ApiContext from '../ApiContext'
 import { getNotesForFolder } from '../notes-helpers'
 import './NoteListMain.css'
+//import PropTypes from 'prop-types'
 
 export default class NoteListMain extends React.Component {
   static defaultProps = {
@@ -17,8 +18,15 @@ export default class NoteListMain extends React.Component {
 
   render() {
     const { folderId } = this.props.match.params
+    console.log(folderId, 'folderId note list main')
     const { notes=[] } = this.context
+    console.log(notes, 'notes note list main')
     const notesForFolder = getNotesForFolder(notes, folderId)
+    console.log(notesForFolder, "this is in note list main")
+    //console.log({folderId});
+    //console.log(notes);
+    //console.log(notesForFolder);
+  
     return (
       <section className='NoteListMain'>
         <ul>
@@ -26,8 +34,9 @@ export default class NoteListMain extends React.Component {
             <li key={note.id}>
               <Note
                 id={note.id}
-                name={note.name}
-                modified={note.modified}
+                note_name={note.note_name}
+                date_modified={note.date_modified}
+                // onDeleteNote={this.onDeleteNote}
               />
             </li>
           )}
@@ -48,3 +57,8 @@ export default class NoteListMain extends React.Component {
     )
   }
 }
+
+// NoteListMain.propTypes = {
+//   match: PropTypes.object,
+//   params: PropTypes.object
+// }
