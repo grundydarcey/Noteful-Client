@@ -11,8 +11,6 @@ export default class NoteListNav extends React.Component {
 
   render() {
     const { folders=[], notes=[] } = this.context 
-    //console.log(folders, "this is in note list nav")
-    //const { notes=[] } = this.context
     return (
       <div className='NoteListNav'>
         <ul className='NoteListNav__list'>

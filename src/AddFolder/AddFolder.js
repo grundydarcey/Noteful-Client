@@ -42,12 +42,7 @@ export default class AddFolder extends Component {
         })
       }
     }
-    
-
-  //updateFolderName(e) {
-  //  const newName = e.target.value;
-  //  this.context.updateNewFolderName(newName);
-  //}
+  
 
   validateFolderName() {
     if (this.context.newFolder.name.trim().length === 0) {
@@ -76,7 +71,6 @@ export default class AddFolder extends Component {
         aria-label="Name"
         required
         defaultValue=""
-        //onChange={(e) => this.updateFolderName(e)}
       />
         <button type="submit">Submit</button>
         </div>
@@ -85,7 +79,6 @@ export default class AddFolder extends Component {
     )
   }
 }
-
 
 AddFolder.propTypes = {
   history: PropTypes.object

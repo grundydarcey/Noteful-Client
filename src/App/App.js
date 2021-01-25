@@ -16,25 +16,25 @@ class App extends Component {
   state = {
     notes: [],
     folders: [],
-    // newFolder: {
-    //   hasError: true,
-    //   touched: false,
-    //   folder_name: '',
-    // },
-    // newNote: {
-    //   note_name: {
-    //     touched: false,
-    //     value: '',
-    //   },
-    //   folderId: {
-    //     touched: false,
-    //     value: '',
-    //   },
-    //   content: {
-    //     touched: false,
-    //     value: '',
-    //   },
-    // },
+    newFolder: {
+      hasError: true,
+      touched: false,
+      folder_name: '',
+    },
+    newNote: {
+      note_name: {
+        touched: false,
+        value: '',
+      },
+      folderId: {
+        touched: false,
+        value: '',
+      },
+      content: {
+        touched: false,
+        value: '',
+      },
+    },
   }
 
   componentDidMount() {
@@ -73,89 +73,15 @@ class App extends Component {
       })
   }
 
-  // updateNewFolderName = name => {
-  //   if (name === undefined) {
-  //     this.setState({
-  //       newFolder: {
-  //         hasError: true,
-  //         touched: true,
-  //         name: "",
-  //       },
-  //     })
-  //   } else if (name.length < 4) {
-  //     this.setState({
-  //       newFolder: {
-  //         hasError: true,
-  //         touched: true,
-  //         name: name,
-  //       },
-  //     })
-  //   } else {
-  //     this.setState({
-  //       newFolder: {
-  //         hasError: false,
-  //         touched: true,
-  //         name: name,
-  //       },
-  //     })
-  //   }
-  // }
-
-  // updateBadSubmitData = () => {
-  //   const nameValue = this.state.newNote.name.value
-  //   const contentValue = this.state.newNote.content.value
-  //   this.setState({
-  //     ...this.state.newNote,
-  //     newNote: {
-  //       name: {
-  //         touched: true,
-  //         value: nameValue
-  //       },
-  //       content: {
-  //         touched: true,
-  //         value: contentValue
-  //       }
-  //     }
-
-
-  //   })
-
-  // }
-
-  // updateNewNoteData = (input, value) => {
-  //   this.setState({
-  //     newNote: {
-  //       ...this.state.newNote,
-  //       [input]: {
-  //         touched: true,
-  //         value: value,
-  //       },
-  //     },
-  //   })
-  // }
-
   handleAddFolder = newFolder => {
     this.setState({
       folders: [...this.state.folders, newFolder],
-      // newFolder: {
-      //   hasError: true,
-      //   touched: false,
-      //   name: "",
-      // }
     })
   }
 
   handleAddNote = note => {
     this.setState({
       notes: [...this.state.notes, note],
-      // newNote: {
-      //   name: {
-      //     touched: false,
-      //   },
-      //   content: {
-      //     touched: false,
-      //   }
-      //}
     })
   }
 
@@ -199,12 +125,7 @@ class App extends Component {
       folders: this.state.folders,
       deleteNote: this.handleDeleteNote,
       addFolder: this.handleAddFolder,
-      //newFolder: this.state.newFolder,
-      //updateNewFolderName: this.updateNewFolderName,
-      //newNote: this.state.newNote,
       handleAddNote: this.handleAddNote,
-      //updateNewNoteData: this.updateNewNoteData,
-      //updateBadSubmitData: this.updateBadSubmitData
     }
     return (
       <ApiContext.Provider value={value}>

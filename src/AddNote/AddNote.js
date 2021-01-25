@@ -3,7 +3,6 @@ import NotefulForm from '../NotefulForm/NotefulForm'
 import ApiContext from '../ApiContext'
 import config from '../config'
 
-
 export default class AddNote extends React.Component {
   static defaultProps = {
     history: {
@@ -13,13 +12,11 @@ export default class AddNote extends React.Component {
   static contextType = ApiContext
 
   addNewNote = note => {
-    note.modified = new Date(note.modified);
-
+    note.date_modified = new Date(note.modified);
     fetch(`${config.API_ENDPOINT}/notes`, {
       method: 'POST',
       headers: {
-        'content-type': 'application/json',
-        'Authorization': `Bearer ${config.API_KEY}`
+        'content-type': 'application/json'
       },
       body: JSON.stringify(note),
     })
@@ -45,20 +42,14 @@ export default class AddNote extends React.Component {
       modified: new Date(),
     }
     if (e.target.name.value.length !== 0 && e.target.content.value.length !== 0) {
-
       this.addNewNote(newNote)
       this.props.history.push('/');
-
     } else {
       return this.context.updateBadSubmitData()
     }
-
-   
-
   }
 
   validateName = () => {
-    
     if (this.context.newNote.name.value === undefined || this.context.newNote.name.value.length === 0) {
       return 'Name is required'
     }
@@ -70,43 +61,30 @@ export default class AddNote extends React.Component {
     }
   }
   render() {
-
     return (
       <section className='AddNote'>
         <h2>Create a note</h2>
         <NotefulForm onSubmit={this.handleSubmit}>
           <div className='field'>
             <label htmlFor='note_name'>
-              Name
-            {this.context.newNote.note_name.touched && (
-            <p>{this.validateName()}</p>
-            )}
+              Name: 
             </label>
             <input type='text' id='note-name' name='name'
               aria-required="true"
               aria-label="Name"
               required
               defaultValue=""
-              onChange={e =>
-                this.context.updateNewNoteData(e.target.name, e.target.value)
-              }
             />
           </div>
           <div className='field'>
             <label htmlFor="content">
               Description
-            {this.context.newNote.content.touched && (
-                <p>{this.validateDescription()}</p>
-              )}
             </label>
             <textarea id='note-content' name='content'
               aria-required="true"
               aria-label="Description"
               defaultValue=""
               required
-              onChange={e =>
-                this.context.updateNewNoteData(e.target.name, e.target.value)
-              }
             />
           </div>
           <div className='field'>
