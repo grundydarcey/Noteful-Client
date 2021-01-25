@@ -78,7 +78,9 @@ export default class AddNote extends React.Component {
           <div className='field'>
             <label htmlFor='note_name'>
               Name
-            {this.context.newNote.note_name.touched && <p>{this.validateName()}</p>}
+            {this.context.newNote.note_name.touched && (
+            <p>{this.validateName()}</p>
+            )}
             </label>
             <input type='text' id='note-name' name='name'
               aria-required="true"

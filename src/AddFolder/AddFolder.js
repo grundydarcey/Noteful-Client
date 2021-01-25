@@ -15,7 +15,7 @@ export default class AddFolder extends Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    if (this.context.newFolder.hasError === true){
+    if (this.context.addFolder.hasError === true){
       return this.context.updateNewFolderName()
     } else {
       const folder = {
@@ -44,10 +44,10 @@ export default class AddFolder extends Component {
     }
     
 
-  updateFolderName(e) {
-    const newName = e.target.value;
-    this.context.updateNewFolderName(newName);
-  }
+  //updateFolderName(e) {
+  //  const newName = e.target.value;
+  //  this.context.updateNewFolderName(newName);
+  //}
 
   validateFolderName() {
     if (this.context.newFolder.name.trim().length === 0) {
@@ -65,7 +65,7 @@ export default class AddFolder extends Component {
         <div className='field'>
         <label htmlFor='folder-name'>
           Name:
-        {this.context.newFolder.touched && (
+        {this.context.addFolder.touched && (
         <p>{this.validateFolderName()}</p>
       )}  
       </label>
@@ -76,10 +76,11 @@ export default class AddFolder extends Component {
         aria-label="Name"
         required
         defaultValue=""
-        onChange={(e) => this.updateFolderName(e)}/>
-      <button type="submit">Submit</button>
-    </div>
-      </NotefulForm>
+        //onChange={(e) => this.updateFolderName(e)}
+      />
+        <button type="submit">Submit</button>
+        </div>
+        </NotefulForm>
       </section>
     )
   }
